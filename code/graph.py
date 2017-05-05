@@ -11,8 +11,15 @@ from sklearn.ensemble import GradientBoostingRegressor
 
 history = pd.read_excel('history.xlsx')
 predict =pd.read_excel('predict.xlsx')
-f, ax = plt.subplots(4, 4, sharex=True, figsize=(20,10))
 
+df = history.copy()
+del df['Time']
+df_norm = (df - df.mean()) / (df.max() - df.min())
+df_norm.plot(figsize=(20, 10), title='All related feature normalized figure')
+plt.savefig('f1.png')
+plt.show()
+
+f, ax = plt.subplots(4, 4, sharex=True, figsize=(20,10))
 predict.plot(title="X benchmark trend Unit: x/d", ax=ax[0][0], color=tuple(tuple(e) for e in np.random.rand(1, 3).tolist()))
 history['TIPS-5Y'].plot(title='history TIPS-5Y', ax=ax[0][1], color=((0.1, 0.2, 0.3)))
 history['TIPS-10Y'].plot(title='history TIPS-10Y', ax=ax[0][2], color=((0.2, 0.1, 0.9)))
@@ -28,5 +35,5 @@ history['COMEX-NC-SHORT'].plot(title='history COMEX-NC-NET', ax=ax[2][3], color=
 history['SPDR:t'].plot(title='history SPDR:t', ax=ax[3][0], color=((0.81, 0.12, 0.43)))
 history['USD/CNY'].plot(title='USD/CNY', ax=ax[3][1], color=((0.1, 0.62, 0.3)))
 
-plt.savefig('x.png')
+plt.savefig('f2.png')
 plt.show()
