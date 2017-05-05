@@ -13,8 +13,8 @@ from sklearn.ensemble import GradientBoostingRegressor
 history = pd.read_excel('history.xlsx')
 del history['Time']
 history_norm = (history - history.mean()) / (history.max() - history.min())
-
 X = history.as_matrix()
+
 predict =pd.read_excel('predict.xlsx')
 del predict['Time']
 Y = predict.as_matrix().reshape(-1)
